@@ -101,7 +101,7 @@ body {
  	font-family: 'Montserrat', sans-serif;
 	font-size: ($fuenteMediana)-2;
 	font-weight: 600;
-	height: 400px;
+	height: 500px;
 	margin: 10px;
 	text-align: center;
 	border-radius: 15px;
@@ -135,6 +135,11 @@ body {
 	height: 170px;
 	margin-bottom: 15px;
 	border-radius: 15px 15px 0 0;
+}
+
+.imgEncuadrado{
+	object-fit: fill;
+
 }
 
 .img-1 {

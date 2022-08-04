@@ -112,7 +112,7 @@ body {
 
  .seccionEncuadrado--mediano {
 
-     a {
+     h4 {
 	background-color: #DAE5D0;
 	color: rgb(0, 0, 0);
 	padding: 15px 20px;
@@ -120,7 +120,12 @@ body {
 	text-align: center;
 	margin: 10px 40px;
 	text-decoration: none;
-	font-weight: 600;
+	font-weight: 400;
+	font-size: small;
+	
+	}
+	:active {
+		transform: translateY(2px);	
 	}
  } 
 

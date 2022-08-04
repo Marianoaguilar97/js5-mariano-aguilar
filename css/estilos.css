@@ -108,7 +108,7 @@ body {
   text-align: center;
   border-radius: 15px; }
 
-.seccionEncuadrado--mediano a {
+.seccionEncuadrado--mediano h4 {
   background-color: #DAE5D0;
   color: black;
   padding: 15px 20px;
@@ -116,7 +116,11 @@ body {
   text-align: center;
   margin: 10px 40px;
   text-decoration: none;
-  font-weight: 600; }
+  font-weight: 400;
+  font-size: small; }
+
+.seccionEncuadrado--mediano :active {
+  transform: translateY(2px); }
 
 .seccionEncuadrado--mediano:hover {
   background-color: #63a8b8;

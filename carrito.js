@@ -1,6 +1,7 @@
 //selec de elem
 const productosEl = document.querySelector(".productos");
 const carritoEl = document.querySelector(".productosCarrito");
+const carritoTotal = document.querySelector(".total");
 //rederizado productos
 function renderProductos () {
     viajes.forEach( (viaje) => {
@@ -24,7 +25,7 @@ let carrito = [];
 function AgregarCarrito (id) {
     //validacion si ya existe item en carrito
     if(carrito.some( (item) => item.id === id)) {
-        alert("producto ya esta en el carrito");
+        cambiarCantidadUnidades("plus", id);
     }
     else {
         const item = viajes.find( (viaje) => viaje.id === id );
@@ -39,13 +40,28 @@ function AgregarCarrito (id) {
 //funcion de actualizar carrito
 function actualizarCarrito(){
     renderItemsCarrito();
-    //renderSubTotal();
+    renderTotal()
+}
+// calcular y renderizar total
+function renderTotal() {
+    let precioTotal = 0, 
+    itemsTotal = 0;
 
+    carrito.forEach( (item) => {
+        precioTotal += item.precio * item.numeroDeUnidades
+        itemsTotal += item.numeroDeUnidades;
+    });
+
+    carritoTotal.innerHTML = `
+    <h3>Precio Total: $${precioTotal} (Items:${itemsTotal} )</h4>
+    `
 }
 
 //renderizado item carrito
 function renderItemsCarrito(){
-    carrito.forEach( (item) => {carritoEl.innerHTML +=`
+    carritoEl.innerHTML = ""; //vaciado de EL carrito
+    carrito.forEach( (item) => {
+        carritoEl.innerHTML += `
         <hr class="my-4">
       
                           <div class="row mb-4 d-flex justify-content-between align-items-center">
@@ -57,18 +73,18 @@ function renderItemsCarrito(){
                               <h6 class="text-black mb-0">${item.nombre}</h6>
                             </div>
                             <div class="col-md-3 col-lg-3 col-xl-3 d-flex">
-                              <button class="btn btn-link px-2">
+                              <button class="btn btn-link px-2" onclick="cambiarCantidadUnidades('minus', ${item.id})">
                                 <i class="fas fa-minus"></i>
                               </button>
       
                               <div style=" margin: 10px 5px;">${item.numeroDeUnidades}</div>
       
-                              <button class="btn btn-link px-2">
+                              <button class="btn btn-link px-2" onclick="cambiarCantidadUnidades('plus', ${item.id})" >
                                 <i class="fas fa-plus"></i>
                               </button>
                             </div>
                             <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                              <h6 class="mb-0">$ ${item.precio}</h6>
+                              <h6 class="mb-0">Precio unitario:\n $${item.precio}</h6>
                             </div>
                             <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                               <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
@@ -77,4 +93,22 @@ function renderItemsCarrito(){
                           `
     })
 }
-renderItemsCarrito();
+
+// funcion cambiar numero de unidades
+function cambiarCantidadUnidades(accion, id){
+    carrito = carrito.map( (item) => {
+        let numeroDeUnidades = item.numeroDeUnidades;
+        if (item.id === id){
+            if (accion === "minus" && numeroDeUnidades > 1) {
+                numeroDeUnidades--;
+            } else if (accion === "plus" && numeroDeUnidades < item.lugares) {
+                numeroDeUnidades++;
+             }
+        }
+        return {
+          ...item,
+          numeroDeUnidades,
+        };
+    })
+    actualizarCarrito()
+}

@@ -313,12 +313,11 @@ form {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
   bottom: 0;
   width: 100%;
   background: #A0BCC2; }
 
-.footer--nosotros {
+.footer--nosotros--contacto {
   display: flex;
   justify-content: space-between;
   align-items: center;
